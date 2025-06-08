@@ -113,28 +113,28 @@ document.getElementById('signupForm').addEventListener('submit', async function 
   const password = document.getElementById('signupPassword').value;
 
   try {
-    const res = await fetch(`${API_URL}/api/users/signup`, {
+    const res = await fetch('https://zb-properties-production.up.railway.app/api/users/signup', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ name, email, password }),
+      body: JSON.stringify({ name, email, password })
     });
 
-    if (!res.ok) {
-      const errorData = await res.json();
-      throw new Error(errorData.message || 'Signup failed');
-    }
-
     const data = await res.json();
-    console.log('Signup successful:', data);
-    alert('Signup successful!');
-    window.location.href = 'Sign In.html'; // Redirect
+
+    if (res.ok) {
+      alert('Signup successful!');
+      window.location.href = 'Sign In.html'; // redirect
+    } else {
+      alert('Signup failed: ' + data.message);
+    }
   } catch (err) {
     console.error('Signup failed:', err);
-    alert('Signup failed: ' + err.message);
+    alert('Signup failed: Something went wrong');
   }
 });
+
 
 
 // --- Signin Function ---
