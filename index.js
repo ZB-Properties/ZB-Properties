@@ -12,11 +12,7 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
-app.use(cors({
-  origin: ["https://zb-properties.github.io/ZB-Properties/Client-side/Create an account.html"], // e.g., GitHub Pages or Netlify URL
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
-})); 
+app.use(cors()); 
 
 
 app.use('/api/users', userRoutes);

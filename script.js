@@ -104,7 +104,6 @@ window.onclick = function (event) {
 };
 
 // --- Signup Logic ---
-const backendUrl = 'https://zb-properties-production.up.railway.app';
 
 document.getElementById('signupForm').addEventListener('submit', async function (e) {
   e.preventDefault();
@@ -114,7 +113,7 @@ document.getElementById('signupForm').addEventListener('submit', async function 
   const password = document.getElementById('signupPassword').value;
 
   try {
-    const res = await fetch(`${backendUrl}/api/users/signup`, {
+    const res = await fetch(`${API_URL}/api/users/signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
