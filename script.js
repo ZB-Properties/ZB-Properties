@@ -113,7 +113,7 @@ document.getElementById('signupForm').addEventListener('submit', async function 
   const password = document.getElementById('signupPassword').value;
 
   try {
-    const res = await fetch('https://zb-properties-production.up.railway.app/api/users/signup', {
+    const res = await fetch(`${API_URL}/api/users/signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

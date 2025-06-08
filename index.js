@@ -10,10 +10,17 @@ const swagger = require('./swagger/swagger.json');
 dotenv.config();
 
 const app = express();
+
+app.use(cors({
+  origin: 'https://zb-properties.github.io/ZB-Properties/Client-side/Create an account.html', 
+  methods: ['GET','POST','PUT','PATCH','DELETE','OPTIONS'],
+  allowedHeaders: ['Content-Type','Authorization']
+}));
+
+// Handle preflight OPTIONS
+app.options('*', cors());
+
 app.use(express.json());
-
-app.use(cors()); 
-
 
 app.use('/api/users', userRoutes);
 app.use('/api/properties', propertyRoutes);
