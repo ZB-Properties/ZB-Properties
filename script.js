@@ -104,32 +104,39 @@ window.onclick = function (event) {
 };
 
 // --- Signup Logic ---
-document.addEventListener('DOMContentLoaded', () => {
-  const signupForm = document.getElementById('signupForm');
+const backendUrl = 'https://zb-properties-production.up.railway.app';
 
-  if (signupForm) {
-    signupForm.addEventListener('submit', async function (event) {
-      event.preventDefault();
-      const name = document.getElementById('signupName').value;
-      const email = document.getElementById('signupEmail').value;
-      const password = document.getElementById('signupPassword').value;
+document.getElementById('signupForm').addEventListener('submit', async function (e) {
+  e.preventDefault();
 
-      try {
-        const res = await fetch(`${API_URL}/api/users/signup`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, email, password }),
-        });
+  const name = document.getElementById('signupName').value;
+  const email = document.getElementById('signupEmail').value;
+  const password = document.getElementById('signupPassword').value;
 
-        const data = await res.json();
-        alert(data.message);
-        if (res.ok) window.location.href = 'Sign In.html';
-      } catch (error) {
-        console.error('Signup failed:', error);
-      }
+  try {
+    const res = await fetch(`${backendUrl}/api/users/signup`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name, email, password }),
     });
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(errorData.message || 'Signup failed');
+    }
+
+    const data = await res.json();
+    console.log('Signup successful:', data);
+    alert('Signup successful!');
+    window.location.href = 'Sign In.html'; // Redirect
+  } catch (err) {
+    console.error('Signup failed:', err);
+    alert('Signup failed: ' + err.message);
   }
 });
+
 
 // --- Signin Function ---
 async function signin(event) {

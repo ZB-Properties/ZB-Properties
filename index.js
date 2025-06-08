@@ -11,7 +11,13 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+
+app.use(cors({
+  origin: ["https://zb-properties.github.io/ZB-Properties/Client-side/Create an account.html"], // e.g., GitHub Pages or Netlify URL
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+})); 
+
 
 app.use('/api/users', userRoutes);
 app.use('/api/properties', propertyRoutes);
@@ -20,8 +26,17 @@ app.use('/api/properties', propertyRoutes);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swagger));
 
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: err.message || "Internal Server Error" });
+});
+
+
+
+const PORT = process.env.PORT || 7700;
+ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
+
+module.exports = app;
