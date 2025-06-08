@@ -10,8 +10,17 @@ const swagger = require('./swagger/swagger.json');
 dotenv.config();
 
 const app = express();
+
+app.use(cors({
+  origin: '*', 
+  methods: ['GET','POST','PUT','PATCH','DELETE','OPTIONS'],
+  allowedHeaders: ['Content-Type','Authorization']
+}));
+
+app.options('*', cors());
+
+
 app.use(express.json());
-app.use(cors());
 
 app.use('/api/users', userRoutes);
 app.use('/api/properties', propertyRoutes);
@@ -20,8 +29,22 @@ app.use('/api/properties', propertyRoutes);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swagger));
 
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: err.message || "Internal Server Error" });
+});
+
+// Error handler
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: err.message || "Internal Server Error" });
+});
+
+
+const PORT = process.env.PORT || 7700;
+ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
+
+module.exports = app;

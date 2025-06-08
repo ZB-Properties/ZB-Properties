@@ -191,8 +191,6 @@ input{
 	color: var(--lighter-text);
 	font-weight: 500;
 }
-
-
 .input_group .input_label{
 	text-align: left;
 	font-weight: var(--fw-500);
@@ -1405,7 +1403,7 @@ button.submit-btn {
 	background-color: rgb(0, 26, 51);
 }
 
-.btn_1, .inline-btn_1 {
+.inline-btn_1 {
 	width: 60%;
 	height: 40px;
 	font-size: 17px;
@@ -1419,9 +1417,17 @@ button.submit-btn {
 	margin-top: 4px;
 }
 .btn_1 {
-	width: 60%;
+	width: 40%;
+	height: 38px;
 	display: flex;
-	margin: 8px 55px;
+	font-size: 17px;
+	padding: 8px 18px;
+	margin-left: 100px;
+	cursor: pointer;
+	color: black;
+	background-color: rgb(0, 51, 102, 0.4);
+	text-align: center;
+	margin-top: 4px;
 }
 .inline-btn_1 {
 	display: inline-block;
@@ -1432,8 +1438,7 @@ button.submit-btn {
 
 .form-container form {
 	max-width: 350px;
-	height: 490px;
-	height: 500px;
+	height: 400px;
 	margin: 0 auto;
 	background-color: white;
 	box-shadow: 2px 6px 10px #333;
