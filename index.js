@@ -12,13 +12,13 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-  origin: 'https://zb-properties.github.io/ZB-Properties/Client-side/Create an account.html', 
+  origin: '*', 
   methods: ['GET','POST','PUT','PATCH','DELETE','OPTIONS'],
   allowedHeaders: ['Content-Type','Authorization']
 }));
 
-// Handle preflight OPTIONS
 app.options('*', cors());
+
 
 app.use(express.json());
 
@@ -34,6 +34,11 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: err.message || "Internal Server Error" });
 });
 
+// Error handler
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: err.message || "Internal Server Error" });
+});
 
 
 const PORT = process.env.PORT || 7700;
