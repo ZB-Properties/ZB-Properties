@@ -1,7 +1,7 @@
 const API_URL = 'https://zb-properties-production.up.railway.app';
 const token = localStorage.getItem('token');
 
-// --- Navbar Toggle ---
+
 const hamburger = document.querySelector(".hamburger");
 const navMenu = document.querySelector(".nav-menu");
 
