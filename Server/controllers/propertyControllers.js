@@ -1,4 +1,4 @@
-const pool = require('../config/db');
+const pool = require('../models/propertyModel');
 const cloudinary = require('../config/cloudinary');
 
 exports.postProperty = async (req, res) => {
@@ -11,7 +11,7 @@ exports.postProperty = async (req, res) => {
       'INSERT INTO properties (title, description, price, location, type, image_url, owner_id) VALUES ($1, $2, $3, $4, $5, $6, $7)',
       [title, description, price, location, type, imageUrl, owner_id]
     );
-    res.json({ message: "Property posted successfully"});
+    res.json({ message: "Property posted successfully" });
   } catch (err) {
     res.status(500).json({ error: err.message }); 
   }
@@ -113,5 +113,3 @@ exports.getPropertyById = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
-
-

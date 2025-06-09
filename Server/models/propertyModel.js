@@ -1,7 +1,7 @@
 const pool = require('../config/db');
 
 const createPropertyTable = async () => {
-  await pool.connect(`
+  await pool.query(`
     CREATE TABLE IF NOT EXISTS properties (
       id SERIAL PRIMARY KEY,
       title VARCHAR(255),
@@ -16,6 +16,6 @@ const createPropertyTable = async () => {
   `);
 };
 
+createPropertyTable();
 
-
-module.exports = { pool, createPropertyTable };
+module.exports = pool;

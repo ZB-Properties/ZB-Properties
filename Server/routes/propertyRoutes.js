@@ -5,10 +5,8 @@ const multer = require('multer');
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
+const router = express.Router();
 
- const router = express.Router();
-
- 
 router.post('/post', protect, upload.single('image'), postProperty);
 router.put('/update/:id', protect, updateProperty);
 router.put('/sold/:id', protect, markAsSold);
@@ -18,5 +16,4 @@ router.get('/type/:type', getPropertyByType);
 router.get('/:id', getPropertyById);
 
 
-module.exports = router
-
+module.exports = router;
