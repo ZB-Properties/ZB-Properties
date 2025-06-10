@@ -11,13 +11,13 @@ dotenv.config();
 
 const app = express();
 
+const allowedOrigins = ['https://zb-properties.github.io'];
+
 app.use(cors({
-  origin: 'https://zb-properties.github.io', 
+  origin: allowedOrigins, 
   methods: ['GET','POST','PUT','PATCH','DELETE','OPTIONS'],
   allowedHeaders: ['Content-Type','Authorization']
 }));
-
-app.options('*', cors());
 
 
 app.use(express.json());
