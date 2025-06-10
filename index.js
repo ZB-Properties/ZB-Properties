@@ -6,21 +6,17 @@ const propertyRoutes = require('./Server/routes/propertyRoutes');
 const swaggerUi = require('swagger-ui-express');
 const swagger = require('./swagger/swagger.json');
 
+const path = require('path');
+
 
 dotenv.config();
 
 const app = express();
 
-const allowedOrigins = ['https://zb-properties.github.io/ZB-Properties'];
-
-app.use(cors({
-  origin: allowedOrigins, 
-  methods: ['GET','POST','PUT','PATCH','DELETE','OPTIONS'],
-  allowedHeaders: ['Content-Type','Authorization']
-}));
-
-
+app.use(cors());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.use('/api/users', userRoutes);
 app.use('/api/properties', propertyRoutes);
@@ -34,10 +30,9 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: err.message || "Internal Server Error" });
 });
 
-// Error handler
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ error: err.message || "Internal Server Error" });
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'Create an account.html'));
 });
 
 

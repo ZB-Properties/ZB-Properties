@@ -1,4 +1,4 @@
-const API_URL = 'https://zb-properties-production.up.railway.app';
+const API_URL = '';
 const token = localStorage.getItem('token');
 
 
@@ -113,7 +113,7 @@ document.getElementById('signupForm').addEventListener('submit', async function 
   const password = document.getElementById('signupPassword').value;
 
   try {
-    const res = await fetch(`${API_URL}/api/users/signup`, {
+    const res = await fetch(`/api/users/signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -144,7 +144,7 @@ async function signin(event) {
   const password = document.getElementById('signinPassword').value;
 
   try {
-    const res = await fetch(`${API_URL}/api/users/signin`, {
+    const res = await fetch(`/api/users/signin`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),
@@ -165,7 +165,7 @@ async function signin(event) {
 // --- Fetch Properties ---
 async function fetchProperties() {
   try {
-    const res = await fetch(`${API_URL}/api/properties/all`);
+    const res = await fetch(`/api/properties/all`);
     const data = await res.json();
     displayProperties(data);
   } catch (error) {
@@ -187,7 +187,7 @@ if (postPropertyForm) {
     formData.append('image_url', document.getElementById('image').files[0]);
 
     try {
-      const res = await fetch(`${API_URL}/api/properties/post`, {
+      const res = await fetch(`/api/properties/post`, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${token}` },
         body: formData,
@@ -229,7 +229,7 @@ async function updateProperty(id) {
   if (!newPrice) return;
 
   try {
-    const res = await fetch(`${API_URL}/api/properties/update/${id}`, {
+    const res = await fetch(`/api/properties/update/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -251,7 +251,7 @@ async function deleteProperty(id) {
   if (!confirm('Are you sure?')) return;
 
   try {
-    const res = await fetch(`${API_URL}/api/properties/delete/${id}`, {
+    const res = await fetch(`/api/properties/delete/${id}`, {
       method: 'DELETE',
       headers: { 'Authorization': `Bearer ${token}` },
     });
@@ -267,7 +267,7 @@ async function deleteProperty(id) {
 // --- Get One Property ---
 async function getProperty(id) {
   try {
-    const res = await fetch(`${API_URL}/api/properties/${id}`);
+    const res = await fetch(`/api/properties/${id}`);
     const data = await res.json();
     alert(`Property: ${data.title}\nDescription: ${data.description}`);
   } catch (error) {
@@ -278,7 +278,7 @@ async function getProperty(id) {
 // --- Get Property by Type ---
 async function getPropertyByType(type) {
   try {
-    const res = await fetch(`${API_URL}/api/properties/type/${type}`);
+    const res = await fetch(`/api/properties/type/${type}`);
     const data = await res.json();
     alert(`Property: ${data.title}\nType: ${data.type}`);
   } catch (error) {
@@ -289,7 +289,7 @@ async function getPropertyByType(type) {
 // --- Mark as Sold ---
 async function markAsSold(id) {
   try {
-    const res = await fetch(`${API_URL}/api/properties/sold/${id}`, {
+    const res = await fetch(`/api/properties/sold/${id}`, {
       method: 'PUT',
       headers: { 'Authorization': `Bearer ${token}` },
     });
