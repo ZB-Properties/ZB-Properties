@@ -25,21 +25,25 @@ app.use('/api/properties', propertyRoutes);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swagger));
 
 
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ error: err.message || "Internal Server Error" });
-});
-
-
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 
 const PORT = process.env.PORT || 3000;
+
  app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`); 
 });
+
+
+process.on('uncaughtException', err => {
+  console.error('Uncaught Exception:', err);
+});
+process.on('unhandledRejection', err => {
+  console.error('Unhandled Rejection:', err);
+});
+
 
 
 module.exports = app;
