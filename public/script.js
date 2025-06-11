@@ -2,6 +2,12 @@ const API_URL = '';
 const token = localStorage.getItem('token');
 
 
+  document.getElementById('logoutBtn')?.addEventListener('click', () => {
+    localStorage.removeItem('token');
+    window.location.href = 'Sign in.html';
+  });
+
+
 const hamburger = document.querySelector(".hamburger");
 const navMenu = document.querySelector(".nav-menu");
 
