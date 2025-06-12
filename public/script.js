@@ -4,7 +4,7 @@ const token = localStorage.getItem('token');
 
   document.getElementById('logoutBtn')?.addEventListener('click', () => {
     localStorage.removeItem('token');
-    window.location.href = 'Sign in.html';
+    window.location.href = 'Sign In.html';
   });
 
 
@@ -159,7 +159,7 @@ async function signin(event) {
     const data = await res.json();
     if (res.ok) {
       localStorage.setItem('token', data.token);
-      window.location.href = 'dashboard.html';
+      window.location.href = 'Home.html';
     } else {
       alert(data.message);
     }
