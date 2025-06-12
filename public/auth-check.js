@@ -4,7 +4,7 @@
   const token = localStorage.getItem('token');
   const path = window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1).toLowerCase();
 
-  const openPages = ['sign in.html', 'index.html', 'Home.html'];
+  const openPages = ['Sign In.html', 'index.html', 'Home.html'];
   const protectedPages = ['Post-Property.html','My properties list.html','view properties.html','Searched properties.html'];
 
   
